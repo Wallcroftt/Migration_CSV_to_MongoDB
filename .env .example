@@ -1,0 +1,18 @@
+# --- Identifiants ROOT (Administration système) ---
+MONGO_INITDB_ROOT_USERNAME=admin
+MONGO_INITDB_ROOT_PASSWORD=password
+
+# --- Identifiants APPLICATION (Script de migration - ReadWrite) ---
+APP_USER=app_migration_user
+APP_PASSWORD=migration_password_123
+
+# --- Identifiants CONSULTATION (Médecin/Analyste - ReadOnly) ---
+READ_ONLY_USER=doctor_viewer
+READ_ONLY_PASSWORD=viewer_password_456
+
+#--- identifiants AWS ---
+AWS_ACCESS_KEY_ID=ton_access_key
+AWS_SECRET_ACCESS_KEY=ton_secret_key
+AWS_DEFAULT_REGION=eu-west-3
+S3_BUCKET_NAME=nom-de-ton-bucket
+S3_PREFIX=landing/

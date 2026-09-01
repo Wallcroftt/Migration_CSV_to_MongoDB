@@ -1,0 +1,20 @@
+# Sécurité : Variables d'environnement
+.env
+
+# Environnements virtuels Python
+venv/
+.venv/
+
+# Fichiers temporaires générés par Python
+__pycache__/
+*.pyc
+
+# Environnements virtuels supplémentaires
+env/
+
+# Fichiers de configuration de l'éditeur (VS Code)
+*.code-workspace
+.vscode/
+
+# Archives et fichiers compressés
+Archives/

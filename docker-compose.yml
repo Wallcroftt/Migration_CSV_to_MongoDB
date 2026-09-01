@@ -1,0 +1,41 @@
+services:
+  mongo:
+    image: mongo:7.0
+    container_name: mongo
+    restart: always
+    ports:
+      - "27023:27017"
+    environment:
+      # Identifiants ROOT (pour l'administration du serveur)
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+      # Variables transmises au script init-mongo.js pour créer les rôles
+      APP_USER: ${APP_USER}
+      APP_PASSWORD: ${APP_PASSWORD}
+      READ_ONLY_USER: ${READ_ONLY_USER}
+      READ_ONLY_PASSWORD: ${READ_ONLY_PASSWORD}
+    volumes:
+      - mongo_data:/data/db
+      # Montage du script d'initialisation pour créer les rôles et les utilisateurs 
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 20s
+
+  migration:
+    build: ./migration
+    container_name: mongo_migration
+    environment:
+      # SÉCURITÉ : Le script utilise l'utilisateur "app" et non le "root"
+      - MONGO_URI=mongodb://${APP_USER}:${APP_PASSWORD}@mongo:27017/healthcare_db?authSource=healthcare_db
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      mongo:
+        condition: service_healthy
+
+volumes:
+  mongo_data:
