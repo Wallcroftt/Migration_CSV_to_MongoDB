@@ -1,3 +1,5 @@
+![CI Status](https://github.com/Wallcroftt/Migration_CSV_to_MongoDB/actions/workflows/ci.yml/badge.svg)
+
 # 🏥 Projet 5 : Pipeline ETL de Données de Santé (S3 vers MongoDB & CI/CD)
 
 Ce projet implémente un pipeline ETL (Extract, Transform, Load) robuste permettant d'extraire, nettoyer, transformer et migrer des données de santé depuis un stockage objet cloud (Amazon S3 / Data Lake) vers une base de données NoSQL (MongoDB). L'ensemble de l'infrastructure est conteneurisé via Docker et sécurisé par des tests unitaires et un pipeline d'intégration continue (CI) avec GitHub Actions.
